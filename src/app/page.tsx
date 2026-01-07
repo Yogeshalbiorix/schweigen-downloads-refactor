@@ -1,65 +1,93 @@
-import Image from "next/image";
+import { ShadcnShowcase } from "@/components/ShadcnShowcase";
+import DownloadsTable from "@/components/DownloadsTable";
+import { DownloadItem } from "@/hooks/useDownloadsTableItems";
+
+const MOCK_DATA: DownloadItem[] = [
+  {
+    id: 1,
+    name: "Schweigen Silent Range Brochure",
+    downloadUrl: "https://example.com/brochure.pdf",
+    primaryDownloadCategory: "Brochures",
+    primaryRelatedProductCategory: "Silent Range",
+    filesize: "2.5 MB",
+    fileType: "PDF",
+    filename: "silent-range-brochure.pdf"
+  },
+  {
+    id: 2,
+    name: "Installation Guide - UM1170-9S",
+    downloadUrl: "https://example.com/install-guide.pdf",
+    primaryDownloadCategory: "Installation Guides",
+    primaryRelatedProductCategory: "Undermount",
+    filesize: "1.2 MB",
+    fileType: "PDF",
+    filename: "UM1170-9S_install.pdf"
+  },
+  {
+    id: 3,
+    name: "User Manual - WM2190-6S",
+    downloadUrl: "https://example.com/manual.pdf",
+    primaryDownloadCategory: "User Manuals",
+    primaryRelatedProductCategory: "Wallmount",
+    filesize: "3.8 MB",
+    fileType: "PDF",
+    filename: "WM2190-6S_manual.pdf"
+  },
+  {
+    id: 4,
+    name: "Spec Sheet - IS4160",
+    downloadUrl: "#",
+    primaryDownloadCategory: "Technical Specifications",
+    primaryRelatedProductCategory: "Island",
+    filesize: "500 KB",
+    fileType: "PDF"
+  },
+  {
+    id: 5,
+    name: "2024 Product Catalog",
+    downloadUrl: "#",
+    primaryDownloadCategory: "Brochures",
+    filesize: "15 MB",
+    fileType: "PDF"
+  },
+  {
+    id: 6,
+    name: "SketchUp Model - UM1170",
+    downloadUrl: "#",
+    primaryDownloadCategory: "CAD Drawings",
+    primaryRelatedProductCategory: "Undermount",
+    filesize: "5 MB",
+    fileType: "SKP",
+    mimetype: "application/x-sketchup"
+  },
+  // Add more items to test pagination
+  ...Array.from({ length: 15 }).map((_, i) => ({
+    id: 10 + i,
+    name: `Sample Document ${i + 1}`,
+    downloadUrl: "#",
+    primaryDownloadCategory: i % 2 === 0 ? "User Manuals" : "Brochures",
+    primaryRelatedProductCategory: i % 3 === 0 ? "Silent Range" : "Undermount",
+    filesize: `${(i + 1) * 100} KB`,
+    fileType: "PDF"
+  }))
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen bg-gray-50 p-8 font-sans">
+      <div className="mx-auto max-w-5xl space-y-20">
+        <section>
+          <div className="mb-8">
+            <span className="text-xs font-bold text-rose-500 uppercase tracking-widest">— Demo</span>
+            <h1 className="mt-2 text-3xl font-bold text-gray-900">Schweigen Downloads Widget</h1>
+          </div>
+          <DownloadsTable data={MOCK_DATA} />
+        </section>
+
+        <hr className="border-gray-200" />
+
+        <ShadcnShowcase />
+      </div>
     </div>
   );
 }
